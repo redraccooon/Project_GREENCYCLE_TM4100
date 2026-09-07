@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             TreeTypeSeeder::class,
             ItemSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }

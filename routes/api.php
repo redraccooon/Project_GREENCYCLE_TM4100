@@ -5,13 +5,13 @@ use App\Http\Controllers\Api\TreeController;
 use Illuminate\Support\Facades\Route;
 
 // --- Rutas públicas ---
-//Route::post('/register', [AuthController::class, 'register']);
-//Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
 
 // --- Rutas protegidas (requieren token Sanctum válido) ---
 Route::middleware('auth:sanctum')->group(function () {
-    //Route::post('/logout', [AuthController::class, 'logout']);
-    //Route::get('/me', [AuthController::class, 'me']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/me', [AuthController::class, 'me']);
 
     Route::get('/trees', [TreeController::class, 'index']);
     Route::get('/trees/{tree}', [TreeController::class, 'show']);
