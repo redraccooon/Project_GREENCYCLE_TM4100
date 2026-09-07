@@ -1,101 +1,68 @@
 document.addEventListener('DOMContentLoaded', () => {
     const formLogin = document.getElementById('form-login');
     const formRegister = document.getElementById('form-register');
-    const tabLogin = document.getElementById('tab-login');
-    const tabRegister = document.getElementById('tab-register');
     const alertBox = document.getElementById('alert-box');
 
-    // Asignación de eventos a las pestañas
-    if (tabLogin && tabRegister) {
-        tabLogin.addEventListener('click', (e) => {
-            e.preventDefault();
-            switchTab('login');
-        });
+    // Cambios visuales de la interfaz
+    document.getElementById('tab-login')?.addEventListener('click', () => toggleTabs('login'));
+    document.getElementById('tab-register')?.addEventListener('click', () => toggleTabs('register'));
 
-        tabRegister.addEventListener('click', (e) => {
-            e.preventDefault();
-            switchTab('register');
-        });
-    }
+    // Captura de eventos para enviar a la API
+    formLogin?.addEventListener('submit', (e) => sendAuthRequest(e, '/api/login'));
+    formRegister?.addEventListener('submit', (e) => sendAuthRequest(e, '/api/register'));
 
-    // Envío de formularios
-    if (formLogin) {
-        formLogin.addEventListener('submit', (e) => handleAuth(e, '/api/login'));
-    }
-
-    if (formRegister) {
-        formRegister.addEventListener('submit', (e) => handleAuth(e, '/api/register'));
-    }
-
-    function switchTab(tab) {
+    function toggleTabs(activeTab) {
         hideAlert();
-
-        if (tab === 'login') {
-            // Muestra Login, oculta Registro
+        if (activeTab === 'login') {
             formLogin.classList.remove('form-hidden');
             formRegister.classList.add('form-hidden');
-
-            // Actualiza estilos de pestañas
-            tabLogin.classList.add('tab-active');
-            tabLogin.classList.remove('tab-inactive');
-            tabRegister.classList.add('tab-inactive');
-            tabRegister.classList.remove('tab-active');
         } else {
-            // Muestra Registro, oculta Login
             formRegister.classList.remove('form-hidden');
             formLogin.classList.add('form-hidden');
-
-            // Actualiza estilos de pestañas
-            tabRegister.classList.add('tab-active');
-            tabRegister.classList.remove('tab-inactive');
-            tabLogin.classList.add('tab-inactive');
-            tabLogin.classList.remove('tab-active');
         }
     }
 
-    async function handleAuth(event, endpoint) {
+    async function sendAuthRequest(event, endpoint) {
         event.preventDefault();
         hideAlert();
 
+        // 1. Obtener datos del formulario de la interfaz
         const formData = new FormData(event.target);
-        const data = Object.fromEntries(formData.entries());
+        const payload = Object.fromEntries(formData.entries());
 
         try {
+            // 2. Consumir el controlador de Laravel (AuthController)
             const response = await fetch(endpoint, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(payload)
             });
 
-            const result = await response.json();
+            const data = await response.json();
 
+            // 3. Modificar la interfaz con la respuesta que envió AuthController
             if (!response.ok) {
-                let errorMsg = result.message || 'Ocurrió un error inesperado.';
-                if (result.errors) {
-                    errorMsg = Object.values(result.errors).flat().join('<br>');
-                }
-                showAlert(errorMsg, 'error');
+                const message = data.errors 
+                    ? Object.values(data.errors).flat().join('<br>') 
+                    : (data.message || 'Error en la petición');
+                showAlert(message, 'error');
                 return;
             }
 
-            localStorage.setItem('greencycle_token', result.token);
-            showAlert(`¡Bienvenido, ${result.user.name}! Monedas: ${result.user.green_coins} GreenCoins`, 'success');
+            // Guardar token e informar al usuario en la vista
+            localStorage.setItem('greencycle_token', data.token);
+            showAlert(`¡Hola, ${data.user.name}! Tienes ${data.user.green_coins} GreenCoins.`, 'success');
 
         } catch (error) {
-            showAlert('Error de conexión con el servidor.', 'error');
+            showAlert('No se pudo conectar con el servidor.', 'error');
         }
     }
 
     function showAlert(message, type) {
-        alertBox.className = 'alert-box';
-        if (type === 'error') {
-            alertBox.classList.add('alert-error');
-        } else {
-            alertBox.classList.add('alert-success');
-        }
+        alertBox.className = `alert-box alert-${type}`;
         alertBox.innerHTML = message;
     }
 

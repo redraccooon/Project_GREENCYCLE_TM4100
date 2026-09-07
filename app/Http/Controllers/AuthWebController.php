@@ -9,7 +9,7 @@ class AuthWebController extends Controller
 {
     public function showAuthForm()
     {
-        return view('auth.login'); 
+        return view('auth.login');
     }
 
     public function login(Request $request)
@@ -21,6 +21,7 @@ class AuthWebController extends Controller
 
         if (Auth::attempt($credentials, $request->remember)) {
             $request->session()->regenerate();
+
             return redirect()->intended('/dashboard');
         }
 
