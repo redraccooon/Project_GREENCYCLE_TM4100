@@ -1,276 +1,58 @@
-# Web Development Laravel Starter
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-Proyecto base para el curso **TM4100**, preparado para desarrollar aplicaciones web con Laravel en un entorno reproducible.
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-## Propósito
+## About Laravel
 
-Esta aplicación proporciona un entorno inicial para aprender y practicar:
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- Arquitectura MVC.
-- Rutas y controladores.
-- Vistas con Blade.
-- Formularios y validación de datos.
-- Eloquent ORM.
-- Migraciones y seeders.
-- Integración con PostgreSQL.
-- Pruebas automatizadas.
-- Control de versiones con Git y GitHub.
-- Integración continua con GitHub Actions.
-- Despliegue de aplicaciones web.
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-## Tecnologías
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-El proyecto utiliza las siguientes tecnologías:
+## Learning Laravel
 
-- PHP 8.5.
-- Laravel 13.
-- Laravel Herd.
-- Blade.
-- CSS.
-- JavaScript.
-- Vite.
-- PostgreSQL en Neon.
-- PHPUnit.
-- Laravel Pint.
-- GitHub Actions.
-- Render.
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-## Requisitos locales
+In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-Antes de instalar el proyecto, asegúrese de contar con:
+You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
 
-- Windows 10 o una versión posterior.
-- Laravel Herd.
-- PHP 8.5.
-- Composer 2.
-- Node.js 26.
-- npm.
-- Git.
-- Visual Studio Code.
-- Una cuenta de Neon.
-- Una cuenta de Render.
+## Agentic Development
 
-> No es necesario instalar Docker ni PostgreSQL localmente.
+Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
 
-## Instalación local
+```bash
+composer require laravel/boost --dev
 
-### 1. Clonar el repositorio
-
-Abra PowerShell y ejecute:
-
-```powershell
-git clone URL_DEL_REPOSITORIO
-Set-Location webdev-laravel-starter
+php artisan boost:install
 ```
 
-### 2. Aplicar la configuración de Laravel Herd
+Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
 
-```powershell
-herd init
-herd isolate 8.5
-```
+## Contributing
 
-### 3. Seleccionar la versión de Node.js
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-```powershell
-nvm use
-```
+## Code of Conduct
 
-> Este comando utiliza la versión de Node.js definida para el proyecto.
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-### 4. Instalar las dependencias
+## Security Vulnerabilities
 
-Instale las dependencias de PHP:
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-```powershell
-composer install
-```
+## License
 
-Instale las dependencias de frontend:
-
-```powershell
-npm ci
-```
-
-### 5. Crear la configuración local
-
-Copie el archivo de configuración de ejemplo:
-
-```powershell
-Copy-Item .env.example .env
-```
-
-Genere la clave de la aplicación:
-
-```powershell
-php artisan key:generate
-```
-
-### 6. Configurar la base de datos
-
-Abra el archivo `.env` y agregue la conexión correspondiente a la rama `development` de Neon:
-
-```dotenv
-DB_CONNECTION=pgsql
-DB_URL="URL_DE_NEON_DEVELOPMENT"
-DB_SSLMODE=require
-```
-
-> Sustituya `URL_DE_NEON_DEVELOPMENT` por la cadena de conexión proporcionada por Neon.
-
-### 7. Limpiar la configuración almacenada
-
-```powershell
-php artisan optimize:clear
-```
-
-### 8. Ejecutar las migraciones y seeders
-
-```powershell
-php artisan migrate --seed
-```
-
-### 9. Iniciar Vite
-
-```powershell
-npm run dev
-```
-
-Mantenga esta terminal abierta mientras desarrolla la aplicación.
-
-### 10. Abrir la aplicación
-
-Visite la siguiente dirección en el navegador:
-
-```text
-http://webdev-laravel-starter.test
-```
-
-## Comprobaciones del proyecto
-
-Antes de crear un commit o un pull request, ejecute las siguientes comprobaciones.
-
-### Ejecutar las pruebas automatizadas
-
-```powershell
-php artisan test
-```
-
-### Comprobar el formato del código PHP
-
-```powershell
-.\vendor\bin\pint --test
-```
-
-Para corregir automáticamente el formato:
-
-```powershell
-.\vendor\bin\pint
-```
-
-### Crear los recursos de producción
-
-```powershell
-npm run build
-```
-
-## Ambientes
-
-| Ambiente | Aplicación | Base de datos |
-|---|---|---|
-| Desarrollo | Laravel Herd | Neon `development` |
-| Pruebas | PHPUnit | SQLite en memoria |
-| Producción | Render | Neon `production` |
-
-## Seguridad
-
-Nunca deben publicarse o incluirse en el repositorio:
-
-- El archivo `.env`.
-- Las credenciales de Neon.
-- El valor de `APP_KEY`.
-- Tokens de GitHub.
-- Contraseñas.
-- Claves de API.
-- Archivos que contengan información privada.
-- Cadenas de conexión de bases de datos.
-
-Antes de realizar un commit, revise los archivos modificados:
-
-```powershell
-git status
-```
-
-## Flujo de trabajo
-
-El flujo recomendado para desarrollar una funcionalidad es el siguiente:
-
-1. Actualizar la rama `main`.
-2. Crear una nueva rama de trabajo.
-3. Desarrollar la funcionalidad.
-4. Ejecutar las pruebas localmente.
-5. Comprobar el formato del código.
-6. Crear el commit.
-7. Publicar la rama en GitHub.
-8. Crear un pull request.
-9. Esperar las comprobaciones automáticas.
-10. Revisar el código.
-11. Fusionar el pull request mediante **squash**.
-12. Actualizar el repositorio local.
-
-### Actualizar la rama principal
-
-```powershell
-git switch main
-git pull origin main
-```
-
-### Crear una rama de trabajo
-
-```powershell
-git switch -c feature/nombre-de-la-funcionalidad
-```
-
-### Guardar los cambios
-
-```powershell
-git add .
-git commit -m "feat: agregar nombre de la funcionalidad"
-```
-
-### Publicar la rama
-
-```powershell
-git push -u origin feature/nombre-de-la-funcionalidad
-```
-
-### Actualizar el repositorio después de fusionar
-
-```powershell
-git switch main
-git pull origin main
-```
-
-## Configuración pendiente
-
-Antes de distribuir el proyecto, sustituya:
-
-```text
-URL_DEL_REPOSITORIO
-```
-
-por la URL real del repositorio en GitHub.
-
-También debe sustituir:
-
-```text
-URL_DE_NEON_DEVELOPMENT
-```
-
-por la cadena de conexión de la base de datos de desarrollo en Neon.
-
-
-## Estado del proyecto
-El repositorio utiliza GitHub Actions para validar pruebas, formato y recursos frontend.
-=======
-<!-- branch protection test -->
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
