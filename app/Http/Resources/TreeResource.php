@@ -16,7 +16,6 @@ class TreeResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'nickname' => $this->nickname,
             'level' => $this->level,
             'health' => $this->health,
             'progress' => $this->progress,
