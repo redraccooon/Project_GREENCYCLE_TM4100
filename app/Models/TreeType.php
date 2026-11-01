@@ -18,8 +18,7 @@ class TreeType extends Model
         'description',
         'cares_per_level',
         'harvest_reward',
-        'price',
-        'is_active',
+        'cost',
     ];
 
     protected function casts(): array
@@ -27,8 +26,7 @@ class TreeType extends Model
         return [
             'cares_per_level' => 'integer',
             'harvest_reward' => 'integer',
-            'price' => 'integer',
-            'is_active' => 'boolean',
+            'cost' => 'integer',
         ];
     }
 

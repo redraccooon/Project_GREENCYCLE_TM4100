@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class TreeType extends Model
+class Tree extends Model
 {
     /** @use HasFactory<\Database\Factories\TreeTypeFactory> */
     use HasFactory;
@@ -18,7 +18,6 @@ class TreeType extends Model
     // por la lógica del servidor mediante `forceFill()`, nunca a partir de una solicitud
     protected $fillable = [
         'tree_type_id',
-        'nickname',
     ];
 
     // Refleja los valores predeterminados de la base de datos para que una instancia recién creada ya los tenga en PHP

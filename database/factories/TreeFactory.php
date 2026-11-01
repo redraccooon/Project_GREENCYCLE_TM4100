@@ -23,7 +23,6 @@ class TreeFactory extends Factory
         return [
             'user_id' => User::factory(),
             'tree_type_id' => TreeType::factory(),
-            'nickname' => fake()->optional()->firstName(),
             'level' => 0,
             'health' => 100,
             'progress' => 0,
