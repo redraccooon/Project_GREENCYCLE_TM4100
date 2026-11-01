@@ -28,7 +28,7 @@ return new class extends Migration
             $table->timestamps();
 
 
-            // Tanto la lista "mis árboles" como la tarea futura (todos los árboles ACTIVOS) se filtran según estas columnas.
+            // Tanto la lista "mis árboles" como la tarea futura (todos los árboles ACTIVOS) se filtran según estas columnas
             $table->index(['user_id', 'status']);
             $table->index('status');
         });

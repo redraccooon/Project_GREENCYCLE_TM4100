@@ -7,6 +7,7 @@ use Database\Factories\TreeFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Tree extends Model
 {
@@ -55,6 +56,12 @@ class Tree extends Model
     public function treeType(): BelongsTo
     {
         return $this->belongsTo(TreeType::class);
+    }
+
+    // Efectos (acelerador, riego automático) aplicados a este árbol, tanto actuales como anteriores.
+    public function activeEffects(): HasMany
+    {
+        return $this->hasMany(ActiveEffect::class);
     }
 
     // Es cierto mientras el tiempo de espera del lado del servidor siga en curso

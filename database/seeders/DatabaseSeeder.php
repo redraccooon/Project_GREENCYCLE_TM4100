@@ -24,7 +24,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        $this->call(TreeTypeSeeder::class);
+        // Primero los catálogos: los árboles y las filas del inventario apuntan a ellos.
+        $this->call([
+            TreeTypeSeeder::class,
+            ItemSeeder::class,
+        ]);
 
         // Cuenta de demostración para la presentación (contraseña: «password» de UserFactory)
         $demo = User::factory()->create([
