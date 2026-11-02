@@ -17,11 +17,10 @@ class AuthController extends Controller
 {
     public function register(RegisterRequest $request): JsonResponse
     {
-        $validated = $request->validate([
+        $validated = $request->validated([/*
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+            'password' => ['required', 'string', 'min:8', 'confirmed'],*/]);
 
         $user = User::create([
             'name' => $validated['name'],
@@ -43,12 +42,6 @@ class AuthController extends Controller
         $credentials = $request->authenticate();
 
         $user = User::where('email', $credentials['email'])->first();
-
-        if (! $user || ! Hash::check($credentials['password'], $user->password)) {
-            throw ValidationException::withMessages([
-                'email' => ['Credenciales incorrectas.'],
-            ]);
-        }
 
         $token = $user->createToken('greencycle-token')->plainTextToken;
 

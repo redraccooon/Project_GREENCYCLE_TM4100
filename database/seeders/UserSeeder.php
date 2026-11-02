@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
             'name' => 'Admin GreenCycle',
             'email' => 'admin@greencycles.com',
             'password' => Hash::make('password123'),
-            'green_coins' => 500,
+            'green_coins' => 100,
         ]);
 
 
