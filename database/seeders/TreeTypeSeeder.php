@@ -12,7 +12,6 @@ class TreeTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        //
         $types = [
             [
                 'slug' => 'semilla-basica',
@@ -20,7 +19,7 @@ class TreeTypeSeeder extends Seeder
                 'description' => 'Árbol estándar: 5 cuidados por nivel.',
                 'cares_per_level' => 5,
                 'harvest_reward' => 10,
-                'price' => 0,
+                'cost' => 0,
             ],
             [
                 'slug' => 'semilla-especial',
@@ -28,7 +27,7 @@ class TreeTypeSeeder extends Seeder
                 'description' => 'Crece más rápido: 3 cuidados por nivel, pero entrega menos monedas.',
                 'cares_per_level' => 3,
                 'harvest_reward' => 7,
-                'price' => 15,
+                'cost' => 15,
             ],
         ];
 

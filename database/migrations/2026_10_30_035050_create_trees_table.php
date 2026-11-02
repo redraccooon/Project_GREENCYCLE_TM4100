@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete(); // Si se elimina al usuario, también se eliminan sus árboles
             $table->foreignId('tree_type_id')->constrained()->restrictOnDelete(); // restrictOnDelete: un tipo de árbol que aún tenga árboles plantados no puede eliminarse del catálogo
-            $table->string('nickname', 60)->nullable();
             $table->unsignedTinyInteger('level')->default(0);
             $table->unsignedTinyInteger('health')->default(100);
             $table->unsignedTinyInteger('progress')->default(0); // Las vidas se acumulan para el siguiente nivel; se reinician a 0 al subir de nivel
@@ -29,7 +28,7 @@ return new class extends Migration
             $table->timestamps();
 
 
-            //
+            // Tanto la lista "mis árboles" como la tarea futura (todos los árboles ACTIVOS) se filtran según estas columnas
             $table->index(['user_id', 'status']);
             $table->index('status');
         });

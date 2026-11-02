@@ -26,8 +26,7 @@ class TreeTypeFactory extends Factory
             'description' => fake()->optional()->sentence(),
             'cares_per_level' => 5,
             'harvest_reward' => 10,
-            'price' => 0,
-            'is_active' => true,
+            'cost' => 0,
         ];
     }
 }

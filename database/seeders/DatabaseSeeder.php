@@ -23,7 +23,11 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
         ]);
 
-        $this->call(TreeTypeSeeder::class);
+        // Primero los catálogos: los árboles y las filas del inventario apuntan a ellos.
+        $this->call([
+            TreeTypeSeeder::class,
+            ItemSeeder::class,
+        ]);
 
         // Cuenta de demostración para la presentación (contraseña: «password» de UserFactory)
         $demo = User::factory()->create([
@@ -33,10 +37,11 @@ class DatabaseSeeder extends Seeder
 
         $basic = TreeType::where('slug', 'semilla-basica')->first();
 
-        // One fresh tree and one almost mature tree, handy for demoing the MATURE transition.
-        Tree::factory()->for($demo)->for($basic)->create(['nickname' => 'Robles']);
+        // Tree #1: recién plantadas
+        Tree::factory()->for($demo)->for($basic)->create();
+
+        // Tree #2: A un paso de MATURE, ideal para mostrar la transición
         Tree::factory()->for($demo)->for($basic)->create([
-            'nickname' => 'Casi maduro',
             'level' => 9,
             'progress' => 4,
         ]);
