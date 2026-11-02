@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Tree;
+use App\Models\TreeType;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -17,9 +19,31 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $this->call([
+            UserSeeder::class,
+        ]);
+
+        // Primero los catálogos: los árboles y las filas del inventario apuntan a ellos.
+        $this->call([
+            TreeTypeSeeder::class,
+            ItemSeeder::class,
+        ]);
+
+        // Cuenta de demostración para la presentación (contraseña: «password» de UserFactory)
+        $demo = User::factory()->create([
+            'name' => 'Demo GreenCycle',
+            'email' => 'demo@greencycle.test',
+        ]);
+
+        $basic = TreeType::where('slug', 'semilla-basica')->first();
+
+        // Tree #1: recién plantadas
+        Tree::factory()->for($demo)->for($basic)->create();
+
+        // Tree #2: A un paso de MATURE, ideal para mostrar la transición
+        Tree::factory()->for($demo)->for($basic)->create([
+            'level' => 9,
+            'progress' => 4,
         ]);
     }
 }
