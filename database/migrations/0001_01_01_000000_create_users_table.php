@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            //$table->integer('green_coins')->default(100); // Campo fillable personalizado
+            $table->integer('green_coins')->default(100); // Campo fillable personalizado
             $table->rememberToken();
             $table->timestamps();
         });
